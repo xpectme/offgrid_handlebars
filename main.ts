@@ -42,15 +42,7 @@ export class HandlebarsEngine extends ViewEngine {
     data: Record<string, unknown>,
     options: Partial<ViewEngineOptions> = {},
   ): Promise<string> {
-    options = {
-      rootPath: ".",
-      viewPath: "views",
-      partialPath: "partials",
-      layoutPath: "layouts",
-      extName: ".hbs",
-      layout: "layout",
-      ...options,
-    };
+    options = { ...this.options, ...options };
 
     if (!this.engine.partials[template]) {
       await this.registerPartial(template);
