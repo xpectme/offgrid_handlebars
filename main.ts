@@ -1,7 +1,7 @@
 import { Handlebars, ViewEngine, ViewEngineOptions } from "./deps.ts";
 
 export class HandlebarsEngine extends ViewEngine {
-  constructor(options: Partial<ViewEngineOptions>) {
+  constructor(options?: Partial<ViewEngineOptions>) {
     super(Handlebars, options);
   }
 
@@ -10,6 +10,14 @@ export class HandlebarsEngine extends ViewEngine {
     const res = await this.fetch(filePath);
     const templateFile = await res.text();
     this.engine.registerPartial(partial, templateFile);
+  }
+
+  registerHelper(
+    helperName: string,
+    helperFunction: (...args: unknown[]) => unknown,
+  ): Promise<void> {
+    this.engine.registerHelper(helperName, helperFunction);
+    return Promise.resolve();
   }
 
   async view(
