@@ -1,7 +1,7 @@
 {
   "tasks": {
-    "bundle": "deno bundle -c deno.jsonc main.ts dest/offgrid_handlebars.js",
-    "watch": "deno bundle -c deno.jsonc --watch main.ts dest/offgrid_handlebars.js"
+    "bundle": "deno bundle -c deno.jsonc main.ts dist/offgrid_handlebars.js",
+    "watch": "deno bundle -c deno.jsonc --watch main.ts dist/offgrid_handlebars.js"
   },
   "compilerOptions": {
     "allowJs": true,

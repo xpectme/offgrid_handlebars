@@ -1,5 +1,4 @@
-import { Handlebars } from "./deps.ts";
-import { ViewEngine, ViewEngineOptions } from "./deps.ts";
+import { Handlebars, ViewEngine, ViewEngineOptions } from "./deps.ts";
 
 export class HandlebarsEngine extends ViewEngine {
   constructor(options: Partial<ViewEngineOptions>) {
