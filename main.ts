@@ -6,9 +6,7 @@ export class HandlebarsEngine extends ViewEngine {
   }
 
   async registerPartial(partial: string): Promise<void> {
-    const filePath = `${this.partialPath}/${partial}${this.options.extName}`;
-    const res = await this.fetch(filePath);
-    const templateFile = await res.text();
+    const templateFile = await this.getPartialTemplate(partial);
     this.engine.registerPartial(partial, templateFile);
   }
 
@@ -27,17 +25,12 @@ export class HandlebarsEngine extends ViewEngine {
   ): Promise<string> {
     options = { ...this.options, ...options };
 
-    const filePath = `${this.viewPath}/${template}${this.options.extName}`;
-    const res = await this.fetch(filePath);
-    const templateFile = await res.text();
+    const templateFile = await this.getViewTemplate(template);
     const pageTmpl = await this.engine.compile(templateFile);
     const content = pageTmpl(data);
 
     if (options.layout) {
-      const filePath =
-        `${this.layoutPath}/${options.layout}${this.options.extName}`;
-      const res = await this.fetch(filePath);
-      const layoutFile = await res.text();
+      const layoutFile = await this.getLayoutTemplate(options.layout);
       const layoutTmpl = await this.engine.compile(layoutFile);
       return layoutTmpl({ ...data, content });
     }
